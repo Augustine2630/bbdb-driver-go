@@ -1,0 +1,26 @@
+syntax = "proto3";
+package bbdb.v1;
+
+option go_package = "bbdb-driver-go/gen/bbdb/v1;bbdbv1";
+option java_package = "io.bbdb.v1";
+option java_multiple_files = true;
+
+import "bbdb/v1/common.proto";
+
+service EventQuery {
+  rpc Query(QueryRequest) returns (stream QueryResponse);
+}
+
+message QueryRequest {
+  bytes  partition_key = 1;
+  uint32 event_type    = 2;
+  int64  from_ns       = 3;
+  int64  to_ns         = 4;
+}
+
+message QueryResponse {
+  repeated Event events  = 1;
+  uint64         total   = 2;
+  bool           is_last = 3;
+  Error          error   = 4;
+}
