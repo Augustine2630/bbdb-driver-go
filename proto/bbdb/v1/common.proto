@@ -1,7 +1,7 @@
 syntax = "proto3";
 package bbdb.v1;
 
-option go_package = "bbdb-driver-go/gen/bbdb/v1;bbdbv1";
+option go_package = "github.com/Augustine2630/bbdb-driver-go/gen/bbdb/v1;bbdbv1";
 option java_package = "io.bbdb.v1";
 option java_multiple_files = true;
 

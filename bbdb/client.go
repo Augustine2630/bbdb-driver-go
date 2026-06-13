@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	bbdbv1 "bbdb-driver-go/gen/bbdb/v1"
+	bbdbv1 "github.com/Augustine2630/bbdb-driver-go/gen/bbdb/v1"
 )
 
 // QueryRequest is the input for Client.Query.

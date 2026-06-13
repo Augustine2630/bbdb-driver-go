@@ -1,3 +1,5 @@
+github.com/Augustine2630/bbdb-driver-go v0.0.0-20260613174825-34ab2ee1ba27 h1:vbFBx0ZHM/FXXVn8VxmsEzlHd+6slQn5GsWfO4Yv0nM=
+github.com/Augustine2630/bbdb-driver-go v0.0.0-20260613174825-34ab2ee1ba27/go.mod h1:Z8bpHpilxAKSIglPb+4089iQ1EVQkbFs5cBNYEVmKDA=
 github.com/go-logr/logr v1.4.2 h1:6pFjapn8bFcIbiKo3XT4j/BhANplGihG6tvd+8rYgrY=
 github.com/go-logr/logr v1.4.2/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/go-logr/stdr v1.2.2 h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=

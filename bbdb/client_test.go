@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	bbdbv1 "bbdb-driver-go/gen/bbdb/v1"
-	"bbdb-driver-go/bbdb"
+	bbdbv1 "github.com/Augustine2630/bbdb-driver-go/gen/bbdb/v1"
+	"github.com/Augustine2630/bbdb-driver-go/bbdb"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	bbdbv1 "bbdb-driver-go/gen/bbdb/v1"
+	bbdbv1 "github.com/Augustine2630/bbdb-driver-go/gen/bbdb/v1"
 
 	"google.golang.org/grpc"
 )
