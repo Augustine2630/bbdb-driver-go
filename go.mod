@@ -1,4 +1,4 @@
-module bbdb-driver-go
+module github.com/Augustine2630/bbdb-driver-go
 
 go 1.25.4
 
