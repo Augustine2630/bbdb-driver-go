@@ -98,10 +98,16 @@ func (b *batcher) sendBatch(ctx context.Context, batch []pendingEvent) {
 
 	var lastErr error
 	for attempt := 0; attempt < 5; attempt++ {
-		lastErr = b.send(ctx, req)
+		var resp *bbdbv1.WriteResponse
+		resp, lastErr = b.send(ctx, req)
 		if lastErr == nil {
 			bo.reset()
-			b.notifyAll(batch, WriteResult{BatchID: req.BatchId})
+			result := WriteResult{BatchID: req.BatchId}
+			if resp != nil {
+				result.Accepted = resp.GetAccepted()
+				result.PartitionKeys = resp.GetPartitionKeys()
+			}
+			b.notifyAll(batch, result)
 			return
 		}
 		b.stream = nil
@@ -118,24 +124,24 @@ done:
 	b.notifyAll(batch, WriteResult{Err: lastErr})
 }
 
-func (b *batcher) send(ctx context.Context, req *bbdbv1.WriteRequest) error {
+func (b *batcher) send(ctx context.Context, req *bbdbv1.WriteRequest) (*bbdbv1.WriteResponse, error) {
 	stream, err := b.getStream(ctx)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if err := stream.Send(req); err != nil {
 		b.stream = nil
-		return fmt.Errorf("send: %w", err)
+		return nil, fmt.Errorf("send: %w", err)
 	}
 	resp, err := stream.Recv()
 	if err != nil && err != io.EOF {
 		b.stream = nil
-		return fmt.Errorf("recv: %w", err)
+		return nil, fmt.Errorf("recv: %w", err)
 	}
 	if resp != nil && resp.Error != nil {
-		return fmt.Errorf("server error %d: %s", resp.Error.Code, resp.Error.Message)
+		return nil, fmt.Errorf("server error %d: %s", resp.Error.Code, resp.Error.Message)
 	}
-	return nil
+	return resp, nil
 }
 
 func (b *batcher) getStream(ctx context.Context) (bbdbv1.EventIngestion_WriteClient, error) {
